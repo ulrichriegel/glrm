@@ -1,7 +1,7 @@
 Package: glrm
 Type: Package
 Title: Implementation of the loss ratio method and the generalized loss ratio method in the extended additive model
-Version: 1.9.5
+Version: 1.9.6
 Author: person("Ulrich", "Riegel", role = c("aut", "cre"),
                      email = "Ulrich.Riegel@gmx.de")
 Maintainer: Ulrich Riegel <ulrich.riegel@gmx.de>
@@ -12,4 +12,4 @@ Encoding: UTF-8
 LazyData: true
 LinkingTo: Rcpp
 Imports: Rcpp
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
