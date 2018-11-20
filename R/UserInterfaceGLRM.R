@@ -71,6 +71,10 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
   }
 
   n <- nrow(triangle)
+  if (is.integer(triangle)) {
+    triangle <- as.double(triangle)
+    triangle <- matrix(triangle, ncol = n)
+  }
 
   if (is.incremental) {
     S <- triangle
@@ -85,6 +89,7 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
 
 
 
+
   if (!is.numeric(volumes)) {
     stop("Volumes must be provided in a vector!")
   } else {
@@ -95,6 +100,9 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
     if (min(volumes) <= 0) {
       stop("Volumes must be positive.")
     }
+  }
+  if (is.integer(volumes)) {
+    volumes <- as.double(volumes)
   }
 
   if (is.null(c)) {
