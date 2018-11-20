@@ -176,7 +176,13 @@ OptimalWeights_LR_Method <- function(v, m, s_squared, epsilon) {
     for (i in 1:(n-k+1)) {
       CovMatrix[i,i] <- (m[k]^2 + s_squared[k]/v[i]) * prod1plusepssq[i] - m[k]^2
     }
-    OptWeights_Matrix[1:(n-k+1),k] <- CalculateOptimalWeights(CovMatrix)
+    if (det(CovMatrix) > 0) {
+      OptWeights_Matrix[1:(n-k+1),k] <- CalculateOptimalWeights(CovMatrix)
+    } else {
+      # case s_squared[k] == 0
+      OptWeights_Matrix[1:(n-k+1),k] <- 1 / (n-k+1)
+    }
+
   }
   OptWeights_Matrix[1,n] <- 1
   return(OptWeights_Matrix)

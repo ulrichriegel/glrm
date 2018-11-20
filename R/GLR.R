@@ -84,7 +84,12 @@ Generalized_LR_Method <- function(S, v, K = NULL, c = NULL, eps_start = 0.05, lo
   for (k in 1:(n-1)) {
     s_squared_start <- c(s_squared_start, sum((v[1:(n-k+1)]*(S[1:(n-k+1),k]/v[1:(n-k+1)]-m_start[k])^2))/(n-k))
   }
-  s_squared_start <- c(s_squared_start, min(s_squared_start[n-1]^2/s_squared_start[n-2],s_squared_start[n-1]))
+  if (s_squared_start[n-2] > 0) {
+    s_squared_start <- c(s_squared_start, min(s_squared_start[n-1]^2/s_squared_start[n-2],s_squared_start[n-2]))
+  } else {
+    s_squared_start <- c(s_squared_start, 0)
+  }
+
 
   if (!is.null(s_sq_ext)) {
     lower_bound_cv_S <- 0
@@ -346,7 +351,12 @@ ParameterEstimation <- function(K, J, J_all, N, eps, c, S, m, s_squared, v, v_ha
 
   h <- list()
   for (l in 1:n) {
-    h[[l]] <- CalculateOptimalWeights((CovM[[l]] + b[[l]] %*% t(b[[l]])), RequirePositiveWeights = RequirePositiveWeights)
+    if (det(CovM[[l]]) <= 0) {
+      temp <- nrow(CovM[[l]])
+      h[[l]] <- rep(1/temp, temp)
+    } else {
+      h[[l]] <- CalculateOptimalWeights((CovM[[l]] + b[[l]] %*% t(b[[l]])), RequirePositiveWeights = RequirePositiveWeights)
+    }
   }
 
   m_hat <- numeric()
@@ -368,9 +378,14 @@ ParameterEstimation <- function(K, J, J_all, N, eps, c, S, m, s_squared, v, v_ha
       Temp <- Temp + (m_hat_per_cell[i,k]-m_hat[k])^2 / Temp2
     }
     s_hat_sq[k] <- Temp * s_squared[k] / (n-k+1)
+    if (is.nan(s_hat_sq[k])) s_hat_sq[k] <- 0
   }
   # s_hat_sq[n] <- min(1, s_hat_sq[n-1] / s_hat_sq[n-2]) * s_hat_sq[n-1]
-  s_hat_sq[n] <- min(s_hat_sq[n-1]^2 / s_hat_sq[n-2], s_hat_sq[n-2])
+  if (s_hat_sq[n-2] > 0) {
+    s_hat_sq[n] <- min(s_hat_sq[n-1]^2 / s_hat_sq[n-2], s_hat_sq[n-2])
+  } else {
+    s_hat_sq[n] <- 0
+  }
 
   if (!is.null(setS)) {
     if (is.null(Relativities_s_sq)) {
@@ -380,14 +395,20 @@ ParameterEstimation <- function(K, J, J_all, N, eps, c, S, m, s_squared, v, v_ha
     Temp <- 0
     s_sq_relativities <- 0
     for (k in setS) {
-      Temp <- Temp + n - k
-      s_sq_relativities <- s_sq_relativities + (n-k) / Relativities_s_sq[k] * s_hat_sq[k]
+      if (Relativities_s_sq[k] > 0) {
+        Temp <- Temp + n - k
+        s_sq_relativities <- s_sq_relativities + (n-k) / Relativities_s_sq[k] * s_hat_sq[k]
+      }
     }
     s_sq_relativities <- s_sq_relativities / Temp
     for (k in setS) {
       s_hat_sq[k] <- s_sq_relativities * Relativities_s_sq[k]
     }
-    s_hat_sq[n] <- min(s_hat_sq[n-1]^2 / s_hat_sq[n-2], s_hat_sq[n-2])
+    if (s_hat_sq[n-2] > 0) {
+      s_hat_sq[n] <- min(s_hat_sq[n-1]^2 / s_hat_sq[n-2], s_hat_sq[n-2])
+    } else {
+      s_hat_sq[n] <- 0
+    }
   }
 
   s_hat_sq <- pmax(s_hat_sq, lower_bound_s_sq)
