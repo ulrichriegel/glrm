@@ -45,7 +45,12 @@ LR_Method <- function(S, v, W_used = NULL) {
     s_squared[k] <- sum((v[1:(n-k+1)]*(S[1:(n-k+1),k]/v[1:(n-k+1)]-m[k])^2))/(n-k)
   }
   # s_squared[n] <- min(s_squared[n-1]^2/s_squared[n-2],s_squared[n-1])
-  s_squared[n] <- min(s_squared[n-1]^2/s_squared[n-2],s_squared[n-2])
+  if (s_squared[n-2] > 0) {
+    s_squared[n] <- min(s_squared[n-1]^2/s_squared[n-2],s_squared[n-2])
+  } else {
+    s_squared[n] <- 0
+  }
+
   S_incl_predictions <- S
   for (k in 2:n) {
     S_incl_predictions[(n-k+2):n,k] <- v[(n-k+2):n] * m[k]
