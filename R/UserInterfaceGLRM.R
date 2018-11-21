@@ -75,6 +75,11 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
     triangle <- as.double(triangle)
     triangle <- matrix(triangle, ncol = n)
   }
+  if (!is.na(triangle[n,2])) {
+    if ((is.incremental & triangle[n,2] != 0) | (!is.incremental & triangle[n,2] != triangle[n,1])) {
+      warning("The triangle seems to contain data below the diagonal. This data is ignored!")
+    }
+  }
 
   if (is.incremental) {
     S <- triangle
