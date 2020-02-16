@@ -57,8 +57,10 @@
 
 #' @examples
 #' GLRM(glrm_example1_C, glrm_example1_v_hat)
-#' GLRM(glrm_example1_S, glrm_example1_v_hat, is.incremental = TRUE, K = 1:2, UseAllEstimators = FALSE, eps_ext = 0.03, Calculate_MSE_LR = TRUE, Calculate_MSE_GLR = TRUE, Weights_LR = "canonical")
-#' GLRM(glrm_example2_C, glrm_example2_v_hat, Iterations = 100, RunAllSimulations = TRUE, NumberOfSimulations = 1000)
+#' GLRM(glrm_example1_S, glrm_example1_v_hat, is.incremental = TRUE, K = 1:2, UseAllEstimators = FALSE,
+#'      eps_ext = 0.03, Calculate_MSE_LR = TRUE, Calculate_MSE_GLR = TRUE, Weights_LR = "canonical")
+#' GLRM(glrm_example2_C, glrm_example2_v_hat, Iterations = 100, RunAllSimulations = TRUE,
+#'      NumberOfSimulations = 1000)
 
 #' @export
 GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, eps_ext = NULL, eps_start = NULL, eps_min = 0.001, eps_max = 0.1, s_sq_ext = NULL, Iterations = 50, UseAllEstimators = TRUE, Weights_LR = "optimal", Calculate_MSE_GLR = FALSE, Calculate_MSE_LR = FALSE, NumberOfSimulations = 10000, RunAllSimulations = FALSE, IterationsInSimMSE = 20, Use_eps_ext_inSimMSE = FALSE, Use_s_sq_ext_inSimMSE = FALSE, Seed = NULL, UseRcpp = TRUE, UseRelativities_s_sq = TRUE, Relativities_s_sq = NULL, SetIndicesRelativities = NULL, adjust_v_hat_infty_for_small_eps_ext = TRUE, Bias_Correction_m_hat_infty = TRUE) {

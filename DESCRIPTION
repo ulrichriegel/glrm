@@ -1,15 +1,15 @@
 Package: glrm
 Type: Package
-Title: Implementation of the loss ratio method and the generalized loss ratio method in the extended additive model
-Version: 1.9.10
-Author: person("Ulrich", "Riegel", role = c("aut", "cre"),
-                     email = "Ulrich.Riegel@gmx.de")
-Maintainer: Ulrich Riegel <ulrich.riegel@gmx.de>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Implementation of the generalized loss ratio method
+Version: 1.9.11.9000
+Authors@R: person("Ulrich", "Riegel", email = "ulrich.riegel@gmx.de", role = c("aut", "cre"))
+Description: This package provides implementations of the Loss Ratio Method and the Generalized Loss Ratio Method
+    including the calculation of standard errors in the context of the Extended Additive Model. 
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 LinkingTo: Rcpp
 Imports: Rcpp
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
+Depends: R (>= 2.10)
+Language: en-US
