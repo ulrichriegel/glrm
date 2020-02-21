@@ -123,9 +123,9 @@ Generalized_LR_Method <- function(S, v, K = NULL, c = NULL, eps_start = 0.05, lo
 
   if (ShowProgressBar) {
     print(paste0("Recursion for parameter estimation (",Iterations," Iterations)"))
-    pb <- txtProgressBar(min = 0, max = 1, style = 3)
+    pb <- utils::txtProgressBar(min = 0, max = 1, style = 3)
     progress <- 1 / Iterations
-    setTxtProgressBar(pb, progress)
+    utils::setTxtProgressBar(pb, progress)
   }
 
   Scale_Difference_v_v_hat <- 1
@@ -145,7 +145,7 @@ Generalized_LR_Method <- function(S, v, K = NULL, c = NULL, eps_start = 0.05, lo
     g_hat_infty <- Param$g_new
     if (ShowProgressBar) {
       progress <- nu / Iterations
-      setTxtProgressBar(pb, progress)
+      utils::setTxtProgressBar(pb, progress)
     }
   }
   if (ShowProgressBar) {close(pb)}
@@ -572,7 +572,7 @@ CreateR <- function(J, K, epsilon, m, s_squared, v) {
         Temp <- 1
 
         chi <- matrix(c(j_1,k_1,1,i_1,k_1,-1,j_2,k_2,1,i_2,k_2,-1), ncol = 3, byrow = T)
-        chi <- as.matrix(aggregate(x=chi[,3], by = list(chi[,1],chi[,2]), FUN="sum"))
+        chi <- as.matrix(stats::aggregate(x=chi[,3], by = list(chi[,1],chi[,2]), FUN="sum"))
         chi <- chi[chi[,2]!=0 & chi[,3]!=0,]
         chi <- matrix(c(chi),ncol = 3)
 
@@ -585,7 +585,7 @@ CreateR <- function(J, K, epsilon, m, s_squared, v) {
         }
 
         xi <- matrix(c(i_1,k_1,-1,i_2,k_2,-1), ncol = 3, byrow = T)
-        xi <- as.matrix(aggregate(x=xi[,3], by = list(xi[,1],xi[,2]), FUN="sum"))
+        xi <- as.matrix(stats::aggregate(x=xi[,3], by = list(xi[,1],xi[,2]), FUN="sum"))
         xi <- xi[xi[,2]!=0 & xi[,3]!=0,]
         xi <- matrix(c(xi),ncol = 3)
 
@@ -718,7 +718,7 @@ CreateQ <- function(J, K, epsilon, m, s_squared, v) {
         Temp <- 1
 
         chi <- matrix(c(j_1,k_1,1,i_1,k_1,-1,j_2,k_2,1,i_2,k_2,-1), ncol = 3, byrow = T)
-        chi <- as.matrix(aggregate(x=chi[,3], by = list(chi[,1],chi[,2]), FUN="sum"))
+        chi <- as.matrix(stats::aggregate(x=chi[,3], by = list(chi[,1],chi[,2]), FUN="sum"))
         chi <- chi[chi[,2]!=0 & chi[,3]!=0,]
         chi <- matrix(c(chi),ncol = 3)
 
@@ -731,7 +731,7 @@ CreateQ <- function(J, K, epsilon, m, s_squared, v) {
         }
 
         xi <- matrix(c(i_1,k_1,-1,i_2,k_2,-1), ncol = 3, byrow = T)
-        xi <- as.matrix(aggregate(x=xi[,3], by = list(xi[,1],xi[,2]), FUN="sum"))
+        xi <- as.matrix(stats::aggregate(x=xi[,3], by = list(xi[,1],xi[,2]), FUN="sum"))
         xi <- xi[xi[,2]!=0 & xi[,3]!=0,]
         xi <- matrix(c(xi),ncol = 3)
 

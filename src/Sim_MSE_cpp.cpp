@@ -242,7 +242,7 @@ NumericVector Sim_MSE_bullet_LR_cpp(NumericVector S_sim, NumericVector v_sim, in
 
 
   int i;
-  int j;
+  //int j;
   int k;
   int l;
   long SimNr;
@@ -393,9 +393,9 @@ NumericVector Sim_MSE_LR_canonical_cpp(NumericVector S_sim, NumericVector v_sim,
 
 
   int i;
-  int j;
+  //int j;
   int k;
-  int l;
+  //int l;
   long SimNr;
   long Counter_v = 0;
   long Counter_S = 0;
@@ -541,11 +541,11 @@ NumericVector Sim_MSE_CL_cpp(NumericVector S_sim, int n, long NumberOfSimulation
 
 
   int i;
-  int j;
+  //int j;
   int k;
-  int l;
+  //int l;
   long SimNr;
-  long Counter_v = 0;
+  //long Counter_v = 0;
   long Counter_S = 0;
   NumericMatrix S(n+1,n+1);
   NumericMatrix C(n+1,n+1);

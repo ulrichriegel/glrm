@@ -27,28 +27,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// Test_cpp
-double Test_cpp(IntegerVector J_s, IntegerVector K_s, NumericVector g_s, NumericVector h_s, IntegerVector Index_S_s, IntegerVector Index_r_s, NumericVector epsilon_s, NumericVector m_s, NumericVector s_squared_s, NumericVector v_s, int n, IntegerVector Number_of_Est_s);
-RcppExport SEXP _glrm_Test_cpp(SEXP J_sSEXP, SEXP K_sSEXP, SEXP g_sSEXP, SEXP h_sSEXP, SEXP Index_S_sSEXP, SEXP Index_r_sSEXP, SEXP epsilon_sSEXP, SEXP m_sSEXP, SEXP s_squared_sSEXP, SEXP v_sSEXP, SEXP nSEXP, SEXP Number_of_Est_sSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type J_s(J_sSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type K_s(K_sSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type g_s(g_sSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type h_s(h_sSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type Index_S_s(Index_S_sSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type Index_r_s(Index_r_sSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type epsilon_s(epsilon_sSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type m_s(m_sSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type s_squared_s(s_squared_sSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type v_s(v_sSEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type Number_of_Est_s(Number_of_Est_sSEXP);
-    rcpp_result_gen = Rcpp::wrap(Test_cpp(J_s, K_s, g_s, h_s, Index_S_s, Index_r_s, epsilon_s, m_s, s_squared_s, v_s, n, Number_of_Est_s));
-    return rcpp_result_gen;
-END_RCPP
-}
 // CreateM_cpp
 NumericVector CreateM_cpp(IntegerVector J_s, IntegerVector Number_of_Est_s, IntegerVector K_s, NumericVector g_s, NumericVector epsilon_s, NumericVector m_s, NumericVector s_squared_s, NumericVector v_s, int n);
 RcppExport SEXP _glrm_CreateM_cpp(SEXP J_sSEXP, SEXP Number_of_Est_sSEXP, SEXP K_sSEXP, SEXP g_sSEXP, SEXP epsilon_sSEXP, SEXP m_sSEXP, SEXP s_squared_sSEXP, SEXP v_sSEXP, SEXP nSEXP) {
@@ -177,7 +155,6 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_glrm_Cov_S_hat_infty1_S_hat_infty2_cpp", (DL_FUNC) &_glrm_Cov_S_hat_infty1_S_hat_infty2_cpp, 12},
-    {"_glrm_Test_cpp", (DL_FUNC) &_glrm_Test_cpp, 12},
     {"_glrm_CreateM_cpp", (DL_FUNC) &_glrm_CreateM_cpp, 9},
     {"_glrm_CreateQ_cpp", (DL_FUNC) &_glrm_CreateQ_cpp, 8},
     {"_glrm_CreateR_cpp", (DL_FUNC) &_glrm_CreateR_cpp, 8},

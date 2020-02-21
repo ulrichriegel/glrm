@@ -232,10 +232,10 @@ Create_Cov_Matrix_S_infty <- function(J,  K,  g, h, epsilon, m, s_squared, v, bl
     s_squared_s <- s_squared
     v_s <- v
 
-    pb <- txtProgressBar(min = 0, max = 1, style = 3)
+    pb <- utils::txtProgressBar(min = 0, max = 1, style = 3)
     progress <- 0
     step_pb <- 1 / (NumberRowsL * (NumberRowsL + 1) / 2)
-    setTxtProgressBar(pb, progress)
+    utils::setTxtProgressBar(pb, progress)
     for (mu in 1:NumberRowsL) {
       for (nu in mu:NumberRowsL) {
         Index_S_hat_infty1 <- c(L[mu,2:3])
@@ -244,15 +244,15 @@ Create_Cov_Matrix_S_infty <- function(J,  K,  g, h, epsilon, m, s_squared, v, bl
         #print(c("Nr.", mu, nu, "S", Index_S_hat_infty1, "S", Index_S_hat_infty2, "Covariance", CovMatrix[mu,nu]))
         #write.table(CovMatrix, file = "CovDotMatrix.csv", sep = ";", row.names = FALSE)
         progress <- progress + step_pb
-        setTxtProgressBar(pb, progress)
+        utils::setTxtProgressBar(pb, progress)
       }
     }
     close(pb)
   } else {
-    pb <- txtProgressBar(min = 0, max = 1, style = 3)
+    pb <- utils::txtProgressBar(min = 0, max = 1, style = 3)
     progress <- 0
     step_pb <- 1 / (NumberRowsL * (NumberRowsL + 1) / 2)
-    setTxtProgressBar(pb, progress)
+    utils::setTxtProgressBar(pb, progress)
 
     for (mu in 1:NumberRowsL) {
       for (nu in mu:NumberRowsL) {
@@ -263,10 +263,10 @@ Create_Cov_Matrix_S_infty <- function(J,  K,  g, h, epsilon, m, s_squared, v, bl
         # finished <- Sys.time()
         # print(c("Nr.", mu, nu, "S", Index_S_hat_infty1, "S", Index_S_hat_infty2, "Covariance:", CovMatrix[mu,nu]))
         # start <- finished
-        write.table(CovMatrix, file = "CovdotMatrix.csv", sep = ";", row.names = FALSE)
+        utils::write.table(CovMatrix, file = "CovdotMatrix.csv", sep = ";", row.names = FALSE)
 
         progress <- progress + step_pb
-        setTxtProgressBar(pb, progress)
+        utils::setTxtProgressBar(pb, progress)
       }
     }
 

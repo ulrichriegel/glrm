@@ -5,10 +5,6 @@ Cov_S_hat_infty1_S_hat_infty2_cpp <- function(J_s, K_s, g_s, h_s, Index_S_hat_in
     .Call('_glrm_Cov_S_hat_infty1_S_hat_infty2_cpp', PACKAGE = 'glrm', J_s, K_s, g_s, h_s, Index_S_hat_infty1_s, Index_S_hat_infty2_s, epsilon_s, m_s, s_squared_s, v_s, n, Number_of_Est_s)
 }
 
-Test_cpp <- function(J_s, K_s, g_s, h_s, Index_S_s, Index_r_s, epsilon_s, m_s, s_squared_s, v_s, n, Number_of_Est_s) {
-    .Call('_glrm_Test_cpp', PACKAGE = 'glrm', J_s, K_s, g_s, h_s, Index_S_s, Index_r_s, epsilon_s, m_s, s_squared_s, v_s, n, Number_of_Est_s)
-}
-
 CreateM_cpp <- function(J_s, Number_of_Est_s, K_s, g_s, epsilon_s, m_s, s_squared_s, v_s, n) {
     .Call('_glrm_CreateM_cpp', PACKAGE = 'glrm', J_s, Number_of_Est_s, K_s, g_s, epsilon_s, m_s, s_squared_s, v_s, n)
 }

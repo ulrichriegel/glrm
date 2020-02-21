@@ -75,19 +75,19 @@ GLRM(
 
 \item{Use_s_sq_ext_inSimMSE}{Logical. If TRUE then s_sq_ext is used in the simulation of the MSE with unfixed weights. If FALSE then s_sq_ext = NULL is used in the simulation.}
 
+\item{Seed}{Numeric. If Seed != NULL then the value is used as seed for the simulations.}
+
 \item{UseRcpp}{If TRUE then fast Rcpp routines are used.}
 
 \item{UseRelativities_s_sq}{Logical. If TRUE (default) then relativities are used for the estimators of \eqn{s_k^2}}
 
 \item{Relativities_s_sq}{Numeric vector of lenght n which contains the relativities if UseRelativities_s_sq = TRUE. If NULL then the relativities from the estimators of the loss ratio method are used.}
 
+\item{SetIndicesRelativities}{Numeric vector of lenght < n. Contains the columns k for which the relativities are applied. If NULL and UseRelativities_s_sq = TRUE, then SetIndicesRelativities is set to 1:(n-1).}
+
+\item{adjust_v_hat_infty_for_small_eps_ext}{Logical. If TRUE then adjustment of revised volume estimates v_hat_infty is reduced if the adjustment is not plausible for a given eps_ext or eps_max.}
+
 \item{Bias_Correction_m_hat_infty}{Logical. If TRUE (default) then the estimators m_hat_infty are corrected for bias (otherwise weights d are used instead of h)}
-
-\item{SetIndicesRelativities.}{Numeric vector of lenght < n. Contains the columns k for which the relativities are applied. If NULL and UseRelativities_s_sq = TRUE, then SetIndicesRelativities is set to 1:(n-1).}
-
-\item{Seed.}{If Seed != NULL then the value is used as seed for the simulations.}
-
-\item{adjust_v_hat_infty_for_small_eps_ext.}{Logical. If TRUE then adjustment of revised volume estimates v_hat_infty is reduced if the adjustment is not plausible for a given eps_ext or eps_max.}
 }
 \value{
 The function returns a list with various results:

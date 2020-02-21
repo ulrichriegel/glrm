@@ -1,7 +1,7 @@
 Package: glrm
 Type: Package
 Title: Implementation of the generalized loss ratio method
-Version: 1.9.11.9000
+Version: 1.9.12
 Authors@R: person("Ulrich", "Riegel", email = "ulrich.riegel@gmx.de", role = c("aut", "cre"))
 Description: This package provides implementations of the Loss Ratio Method and the Generalized Loss Ratio Method
     including the calculation of standard errors in the context of the Extended Additive Model. 

@@ -12,7 +12,7 @@
 
 #' @examples
 #' CL(glrm_example1_C)
-#' CL(glrm_example1_S, is.incremental = FALSE)
+#' CL(glrm_example1_S, is.incremental = TRUE)
 
 #' @export
 CL <- function(triangle, is.incremental = FALSE) {

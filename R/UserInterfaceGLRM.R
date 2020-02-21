@@ -21,9 +21,9 @@
 #' @param Use_s_sq_ext_inSimMSE Logical. If TRUE then s_sq_ext is used in the simulation of the MSE with unfixed weights. If FALSE then s_sq_ext = NULL is used in the simulation.
 #' @param UseRelativities_s_sq Logical. If TRUE (default) then relativities are used for the estimators of \eqn{s_k^2}
 #' @param Relativities_s_sq Numeric vector of lenght n which contains the relativities if UseRelativities_s_sq = TRUE. If NULL then the relativities from the estimators of the loss ratio method are used.
-#' @param SetIndicesRelativities. Numeric vector of lenght < n. Contains the columns k for which the relativities are applied. If NULL and UseRelativities_s_sq = TRUE, then SetIndicesRelativities is set to 1:(n-1).
-#' @param Seed. If Seed != NULL then the value is used as seed for the simulations.
-#' @param adjust_v_hat_infty_for_small_eps_ext. Logical. If TRUE then adjustment of revised volume estimates v_hat_infty is reduced if the adjustment is not plausible for a given eps_ext or eps_max.
+#' @param SetIndicesRelativities Numeric vector of lenght < n. Contains the columns k for which the relativities are applied. If NULL and UseRelativities_s_sq = TRUE, then SetIndicesRelativities is set to 1:(n-1).
+#' @param Seed Numeric. If Seed != NULL then the value is used as seed for the simulations.
+#' @param adjust_v_hat_infty_for_small_eps_ext Logical. If TRUE then adjustment of revised volume estimates v_hat_infty is reduced if the adjustment is not plausible for a given eps_ext or eps_max.
 #' @param Bias_Correction_m_hat_infty Logical. If TRUE (default) then the estimators m_hat_infty are corrected for bias (otherwise weights d are used instead of h)
 #' @param UseRcpp If TRUE then fast Rcpp routines are used.
 
@@ -118,7 +118,8 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
     if (!is.numeric(c)) {
       stop("c must be a numeric vector.")
     }
-    if (length(c) != n-1) {Dimensions[l-1]
+    if (length(c) != n-1) {
+      #Dimensions[l-1]
       stop("Vector c has wrong size.")
     }
     if (min(c) <= 0) {
@@ -399,9 +400,9 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
 
     if (Calculate_MSE_LR || Calculate_MSE_GLR) {
       print("Calculating MSEs:")
-      pb <- txtProgressBar(min = 0, max = 1, style = 3)
+      pb <- utils::txtProgressBar(min = 0, max = 1, style = 3)
       progress <- 0
-      setTxtProgressBar(pb, progress)
+      utils::setTxtProgressBar(pb, progress)
 
       for (NrOfAlpha in 1:(n+1)) {
         if (Calculate_MSE_LR) {
@@ -418,7 +419,7 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
           Bias_GLRM[NrOfAlpha] <- MSE_GLR_temp$Bias
         }
         progress <- NrOfAlpha / (n+1)
-        setTxtProgressBar(pb, progress)
+        utils::setTxtProgressBar(pb, progress)
       }
       close(pb)
     }
@@ -479,9 +480,9 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
       Predictions_LR_sim <- array(NA, dim = c(n,n,NumberOfSimulations))
 
       print(paste0("Simulating MSEs with unfixed weights"))
-      pb <- txtProgressBar(min = 0, max = 1, style = 3)
+      pb <- utils::txtProgressBar(min = 0, max = 1, style = 3)
       progress <- 0
-      setTxtProgressBar(pb, progress)
+      utils::setTxtProgressBar(pb, progress)
 
       for (SimNr in 1:NumberOfSimulations) {
         if (Use_eps_ext_inSimMSE && Use_s_sq_ext_inSimMSE) {
@@ -498,7 +499,7 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
         LR_sim <- LR_Method(SimulatedData$Triangle[,,SimNr], SimulatedData$volumes[,SimNr], W_opt_sim)
         Predictions_LR_sim[,,SimNr] <- LR_sim$Predictions
         progress <- SimNr / NumberOfSimulations
-        setTxtProgressBar(pb, progress)
+        utils::setTxtProgressBar(pb, progress)
 
       }
 
@@ -657,7 +658,8 @@ GLRM <- function(triangle, volumes, is.incremental = FALSE, K = NULL, c = NULL, 
 
 
 #' @export
-print.rl <- function(ReturnList) {
+print.rl <- function(x, ...) {
+  ReturnList <- x
   cat("\nSummary for Generalized Loss Ratio Method:\n\n")
   print(ReturnList$Summary_GLR)
   cat("\nUsed K: ", ReturnList$K,"\n")

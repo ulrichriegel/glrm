@@ -8,7 +8,7 @@ SimulateClaims <- function(v, m, s_squared, epsilon, NumberOfSimulations, K) {
   sigma <- sqrt(sigma_sqared)
   f <- matrix(1,nrow = n, ncol = NumberOfSimulations)
   for (i in 1:(n-1)) {
-    f[i,] <- rlnorm(NumberOfSimulations, meanlog = mu[i], sdlog = sigma[i])
+    f[i,] <- stats::rlnorm(NumberOfSimulations, meanlog = mu[i], sdlog = sigma[i])
   }
   v_hat <- matrix(0,nrow = n, ncol = NumberOfSimulations)
   for (i in 1:(n-1)) {
@@ -21,10 +21,10 @@ SimulateClaims <- function(v, m, s_squared, epsilon, NumberOfSimulations, K) {
       sigma_sqared <- log(s_squared[k]/(v[i]*m[k]^2)+1)
       mu <- log(v[i]*m[k])-sigma_sqared/2
       sigma <- sqrt(sigma_sqared)
-      S[i,k,] <- rlnorm(NumberOfSimulations, meanlog = mu, sdlog = sigma)
+      S[i,k,] <- stats::rlnorm(NumberOfSimulations, meanlog = mu, sdlog = sigma)
     }
     for (k in (1:n)[-K]) {
-      S[i,k,] <- rnorm(NumberOfSimulations, mean = v[i] * m[k], sd = sqrt(v[i] * s_squared[k]))
+      S[i,k,] <- stats::rnorm(NumberOfSimulations, mean = v[i] * m[k], sd = sqrt(v[i] * s_squared[k]))
     }
   }
   rslt <- list(volumes = v_hat, Triangle = S, m = m, s_squared = s_squared, epsilon = epsilon)

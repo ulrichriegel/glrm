@@ -16,9 +16,9 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 NumericVector CreateR_cpp(IntegerVector J_s, IntegerVector Number_of_Est_s, IntegerVector K_s, NumericVector epsilon_s, NumericVector m_s, NumericVector s_squared_s, NumericVector v_s, int n) {
   int i;
-  int j;
+  //int j;
   int k;
-  int l;
+  //int l;
   int i_1;
   int i_2;
   int j_1;
